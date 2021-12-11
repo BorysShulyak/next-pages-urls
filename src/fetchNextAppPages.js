@@ -10,7 +10,7 @@ import {
 
 const DYNAMIC_ROUTES_REGEXES = [/\[\.\.\.[A-Za-x]+]/, /\[\[\.\.\.[A-Za-x]+]]/];
 
-const fetchNextAppPages = async (
+const fetchNextAppPages = (
   appUrl,
   appDirPath,
   fileRegexesToFilter,
