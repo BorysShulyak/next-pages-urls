@@ -5,6 +5,9 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
+    "test": "jest --testPathPattern='\\/__tests__\\/(?:unit|integration)/.*\\.(?:test|spec)\\.js$'",
+    "test-unit": "jest --testPathPattern='\\/__tests__\\/unit\\/.*\\.(?:test|spec)\\.js$'",
+    "test-integration": "echo \"Error: no test specified\"",
     "lint": "eslint . --ext .jsx,.js --quiet",
     "lint-fix": "eslint . --ext .jsx,.js --fix"
   },

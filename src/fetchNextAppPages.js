@@ -6,17 +6,11 @@ import {
   generateFileBasedRoutingRootPath,
   generatePagesUrls,
   readFileBasedRoutingPaths
-} from './endpointsGenerating.js';
+} from './endpointsGenerating/index.js';
 
 const DYNAMIC_ROUTES_REGEXES = [/\[\.\.\.[A-Za-x]+]/, /\[\[\.\.\.[A-Za-x]+]]/];
 
-const fetchNextAppPages = (
-  appUrl,
-  appDirPath,
-  fileRegexesToFilter,
-  locales,
-  dynamicSlugsMap
-) => {
+const fetchNextAppPages = (appUrl, appDirPath, fileRegexesToFilter, locales, dynamicSlugsMap) => {
   const fileBasedRoutingRootPath = generateFileBasedRoutingRootPath(appDirPath);
   const fileBasedRoutingPaths = readFileBasedRoutingPaths(fileBasedRoutingRootPath);
 
@@ -32,7 +26,6 @@ const fetchNextAppPages = (
   const directEndpoints = generateEndpointsFromFileBasedRoutingPaths(directRoutingPaths);
 
   const pagesDirectUrls = generatePagesUrls(appUrl, locales, directEndpoints);
-  console.log('pagesDirectUrls - ', pagesDirectUrls);
 
   pagesDirectUrls.forEach(async (pageUrl) => {
     try {
@@ -42,13 +35,15 @@ const fetchNextAppPages = (
     }
   });
 
-  dynamicSlugsMap.forEach(async ({ route, slugs }) => {
-    const pageUrl = `${appUrl}${route}/${slugs[0]}`;
-    try {
-      await fetch(pageUrl);
-    } catch (error) {
-      throw new Error(`The request for dynamic page url ${pageUrl} was failed: ${error}`);
-    }
+  dynamicSlugsMap.forEach(({ route, slugs }) => {
+    locales.forEach(async (locale) => {
+      const pageUrl = `${appUrl}/${locale}/${route}/${slugs[0]}`;
+      try {
+        await fetch(pageUrl);
+      } catch (error) {
+        throw new Error(`The request for dynamic page url ${pageUrl} was failed: ${error}`);
+      }
+    })
   });
 };
 

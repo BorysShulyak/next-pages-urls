@@ -1,11 +1,11 @@
-import { getAllFilesFromDir } from './fileUtils.js';
+import { getAllFilesFromDir } from '../fileUtils.js';
 
 /**
  * Generate the full path to file-based routing (e.g. .../apps/<app>/src/pages/).
  * @param {String} appDirPath - Path to app directory from root of the project (e.g. apps/my-app/).
  * @return String - The path to file-based routing
  */
-export const generateFileBasedRoutingRootPath = (appDirPath) => `${appDirPath}src/pages/`;
+export const generateFileBasedRoutingRootPath = (appDirPath) => `${appDirPath}src/pages`;
 
 /**
  * Read and return the files paths from provided directory.
@@ -30,7 +30,7 @@ export const filterFileBasedRoutingPaths = (fileBasedRoutingPaths, routesRegexes
  * @return Array<String> - The array of endpoints.
  */
 export const generateEndpointsFromFileBasedRoutingPaths = (fileBasedRoutingPaths) =>
-  fileBasedRoutingPaths.map((path) => path.split('pages/')[1].split(/(\/index)?.jsx?$/)[0]);
+  fileBasedRoutingPaths.map((path) => path.split('pages')[1].split(/(index)?.jsx?$/)[0]);
 
 /**
  * @param {String} appUrl
@@ -40,7 +40,7 @@ export const generateEndpointsFromFileBasedRoutingPaths = (fileBasedRoutingPaths
  */
 export const generatePagesUrls = (appUrl, locales, endpoints) => {
   const localizedEndpoints = endpoints.reduce((acc, endpoint) => {
-    const localizedEndpoint = locales.map((locale) => `${locale}/${endpoint}`);
+    const localizedEndpoint = locales.map((locale) => `/${locale}${endpoint}`);
     return [...acc, ...localizedEndpoint];
   }, []);
 
