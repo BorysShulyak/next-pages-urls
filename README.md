@@ -20,4 +20,4 @@ As for me, I use this script as a part of development flow in production:
 - Merge it.
 - Enable revalidate and run this script one more time.
 
-FYI, I have created the scheduled inactive job that have all the necessary variable run this script in one click.
+FYI, I have created the scheduled inactive job that have all the necessary variables and run this script in one click.
