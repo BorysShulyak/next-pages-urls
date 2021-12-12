@@ -1,4 +1,7 @@
-import fetch from 'cross-fetch';
+// For more information read:
+// https://vercel.com/docs/concepts/next.js/incremental-static-regeneration
+// https://nextjs.org/docs/routing/introduction
+// https://vercel.com/docs/file-system-api#configuration/pre-rendering/supported-properties/dynamic-routes
 
 import {
   filterFileBasedRoutingPaths,
