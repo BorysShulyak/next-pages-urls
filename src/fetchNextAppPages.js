@@ -10,7 +10,7 @@ import {
 
 const DYNAMIC_ROUTES_REGEXES = [/\[\.\.\.[A-Za-x]+]/, /\[\[\.\.\.[A-Za-x]+]]/];
 
-const fetchNextAppPages = (appUrl, appDirPath, fileRegexesToFilter, locales, dynamicSlugsMap) => {
+const fetchNextAppPages = (appUrl, locales, dynamicSlugsMap, appDirPath, fileRegexesToFilter) => {
   const fileBasedRoutingRootPath = generateFileBasedRoutingRootPath(appDirPath);
   const fileBasedRoutingPaths = readFileBasedRoutingPaths(fileBasedRoutingRootPath);
 
@@ -43,7 +43,7 @@ const fetchNextAppPages = (appUrl, appDirPath, fileRegexesToFilter, locales, dyn
       } catch (error) {
         throw new Error(`The request for dynamic page url ${pageUrl} was failed: ${error}`);
       }
-    })
+    });
   });
 };
 
