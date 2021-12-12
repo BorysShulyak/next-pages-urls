@@ -1,1 +1,1 @@
-export { default as fetchAppPages } from './fetchNextAppPages.js';
+export { default as getNextAppPages } from './getNextAppPages.js';
